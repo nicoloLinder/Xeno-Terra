@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: bc9f3d9cb5f7e4832880e340b3f33f21
+timeCreated: 1513421685
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: aliens and cows
+  fontNames:
+  - aliens and cows
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
