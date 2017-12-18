@@ -592,11 +592,14 @@ PlayerSettings:
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
     Build: 1
+    Collab: 0
+    ErrorHub: 0
+    Hub: 0
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: d77e3e4f-a794-4115-ab58-7c19f0eeee88
-  projectName: PlanetExplo
+  projectName: Xeno-Terra
   organizationId: nicololinder
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
