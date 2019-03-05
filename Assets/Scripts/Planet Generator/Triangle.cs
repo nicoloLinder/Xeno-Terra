@@ -117,4 +117,22 @@ public class Triangle
 		normal = Vector3.Cross (U, V);
 		return normal;
 	}
+
+	public Edge[] GetEdgesWithVertex(Vertex v){
+		Edge [] edges = new Edge [2];
+		if(!edgeAB.Contains(v)){
+			edges [0] = edgeBC;
+			edges [1] = edgeCA;
+		} else if (!edgeBC.Contains (v)) {
+			edges [0] = edgeAB;
+			edges [1] = edgeCA;
+		} else if (!edgeCA.Contains (v)) {
+			edges [0] = edgeAB;
+			edges [1] = edgeBC;
+		}else {
+			Debug.Log ("This triangle does not contain this vertex");
+			return null;
+		}
+		return edges;
+	}
 }

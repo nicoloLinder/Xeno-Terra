@@ -13,12 +13,13 @@ public class IcoSphere
 	#region PublicVariables
 
 	public Perlin noise = new Perlin ();
+    public RidgedMultifractal ridge = new RidgedMultifractal();
 
-	#endregion
+    #endregion
 
-	#region PrivateVariables
+    #region PrivateVariables
 
-	List<Vertex> vertices = new List<Vertex> ();
+    List<Vertex> vertices = new List<Vertex> ();
 	List<Edge> edges = new List<Edge> ();
 	List<Triangle> triangles = new List<Triangle> ();
 
@@ -65,12 +66,17 @@ public class IcoSphere
 
 	#region Constructor
 
+	public IcoSphere(int divisions){
+		GenerateIcosahedron ();
+
+		for (int i = 0; i < divisions; i++) {
+			Subdivide ();
+		}
+	}
+
 	public IcoSphere (int divisions, int octaves, float persistance, float lacunarity, float scale, AnimationCurve heightCurve, float heightMultiplyer, bool variableMaxHeight, int seed)
 	{
-		noise.Seed = seed;
-		noise.Persistence = persistance;
-		noise.Lacunarity = lacunarity;
-		noise.OctaveCount = octaves;
+        SetNoiseParameters(seed, octaves, persistance, lacunarity);
 		GenerateIcosahedron ();
 
 		for (int i = 0; i < divisions; i++) {
@@ -139,12 +145,9 @@ public class IcoSphere
 
 	public void Recreate (int octaves, float persistance, float lacunarity, float scale, AnimationCurve heightCurve, float heightMultiplyer, bool variableMaxHeight, int seed)
 	{
-		noise.Seed = seed;
-		noise.Persistence = persistance;
-		noise.Lacunarity = lacunarity;
-		noise.OctaveCount = octaves;
+        SetNoiseParameters(seed, octaves, persistance, lacunarity);
 
-		foreach (Vertex vertex in vertices) {
+        foreach (Vertex vertex in vertices) {
 			vertex.Normalize ();
 			vertex.index = -1;
 		}
@@ -296,12 +299,24 @@ public class IcoSphere
 	{
 		foreach (Vertex vertex in vertices) {
 			//vertex.Move (noiseMap [(int)((noiseMap.GetLength (0) - 1) * vertex.U), (int)((noiseMap.GetLength (1) - 1) * vertex.V)]);
-			float perlinValue = (float)noise.GetValue (vertex.Coordinates.normalized * scale);
+            float perlinValue = (float)noise.GetValue (vertex.Coordinates.normalized * scale) + (float)ridge.GetValue(vertex.Coordinates.normalized * (scale));
 			perlinValue = heightCurve.Evaluate (perlinValue) * heightMultiplyer;
 
 			vertex.Move (perlinValue);
 		}
 	}
+
+    void SetNoiseParameters(int seed, int octaves, float persistance, float lacunarity)
+    {
+        noise.Seed = seed;
+        noise.Persistence = persistance;
+        noise.Lacunarity = lacunarity;
+        noise.OctaveCount = octaves;
+
+        ridge.Seed = seed;
+        ridge.Lacunarity = lacunarity;
+        ridge.OctaveCount = octaves;
+    }
 
 	#endregion
 

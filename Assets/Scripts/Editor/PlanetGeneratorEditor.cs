@@ -7,9 +7,10 @@ using UnityEditor;
 public class PlanetGeneratorEditor : Editor
 {
 
-	#region Variables
+    #region Variables
 
-	#region PublicVariables
+    #region PublicVariables
+    int i = 34;
 
 	#endregion
 
@@ -32,10 +33,11 @@ public class PlanetGeneratorEditor : Editor
 		base.OnInspectorGUI ();
 
 		if (GUILayout.Button ("Generate")) {
-			planetGen.CreatePlanet ();
-			//planetGen.CreateDetailedPlanet ();
-			//gradientTexture.ChangeColor ();
-		}
+            ScreenCapture.CaptureScreenshot(i++.ToString()+".png");
+            planetGen.CreatePlanet ();
+            //planetGen.CreateDetailedPlanet ();
+            //gradientTexture.ChangeColor ();
+        }
 		if (GUILayout.Button ("Recreate")) {
 			planetGen.icosphere = null;
 			planetGen.CreatePlanet ();

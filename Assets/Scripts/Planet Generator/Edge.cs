@@ -42,4 +42,8 @@ public class Edge
 		return Vector3.Cross (A, B);
 	}
 
+	public Vertex GetCenterPoint(){
+		return (vertexA + vertexB) / 2;
+	}
+
 }

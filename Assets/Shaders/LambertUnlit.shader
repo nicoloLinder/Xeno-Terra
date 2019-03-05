@@ -5,7 +5,7 @@ Shader "Unlit/LambertUnlit"
 {
 	Properties
 	{
-		_MainTex ("Texture", 2D) = "white" {}
+		_MainTex ("Texture", 2D) = "black" {}
         _LambertMul ("Lambert Multiplier", Range(0, 1)) = 1
         _RimMul ("Rim Power", Range(0, 10)) = 1
         _RimColor ("Rim Color", Color) = (1,1,1,1)

@@ -35,6 +35,10 @@ public static class MeshGenerator
 
 		if (!faceted) {
 			foreach (Triangle triangle in triangles) {
+				float heightPercentageA = (triangle.A.Height - minHeight) / (maxHeight - minHeight);
+				float heightPercentageB = (triangle.B.Height - minHeight) / (maxHeight - minHeight);
+				float heightPercentageC = (triangle.C.Height - minHeight) / (maxHeight - minHeight);
+				float triHeightPercentage = (heightPercentageA + heightPercentageB + heightPercentageC) / 3;
 				if((triangle.A).index == -1){
 					meshVertices.Add (triangle.A);
 					triangle.A.index = meshVertices.Count-1;
@@ -72,12 +76,17 @@ public static class MeshGenerator
 				meshVertices.Add (triangle.C);
 				meshTriangles.Add (meshVertices.Count - 1);
 
+				float heightPercentageA = (triangle.A.Height - minHeight) / (maxHeight - minHeight);
+				float heightPercentageB = (triangle.B.Height - minHeight) / (maxHeight - minHeight);
+				float heightPercentageC = (triangle.C.Height - minHeight) / (maxHeight - minHeight);
+				float triHeightPercentage = (heightPercentageA + heightPercentageB + heightPercentageC) / 3;
+
 				float heightPercentage = (triangle.A.Height - minHeight) / (maxHeight - minHeight);
-				uvs.Add (new Vector2 (heightPercentage, 0));
+				uvs.Add (new Vector2 (triHeightPercentage, 0));
 				heightPercentage = (triangle.B.Height - minHeight) / (maxHeight - minHeight);
-				uvs.Add (new Vector2 (heightPercentage, 0));
+				uvs.Add (new Vector2 (triHeightPercentage, 0));
 				heightPercentage = (triangle.C.Height - minHeight) / (maxHeight - minHeight);
-				uvs.Add (new Vector2 (heightPercentage, 0));
+				uvs.Add (new Vector2 (triHeightPercentage, 0));
 
 				normals.Add (triangle.CalculateNormal ());
 				normals.Add (triangle.CalculateNormal ());

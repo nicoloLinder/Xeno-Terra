@@ -10,6 +10,8 @@ public class Vertex
 	public float Y { get { return coordinates.y; } }
 	public float Z { get { return coordinates.z; } }
 	public float Height { get { return Vector3.Distance (Vector3.zero, coordinates); } }
+	public List<Triangle> Triangles { get { return triangles; } }
+	public HashSet<Vertex> Vertices { get { return vertices; } }
 
 	public Vector3 Coordinates { get { return coordinates; } set { coordinates = value; } }
 	public Vector2 UV { get { return uv; } }
@@ -152,6 +154,10 @@ public class Vertex
 			normal += triangle.CalculateNormal ();
 		}
 		return normal;
+	}
+
+	public static float Distance(Vertex v1, Vertex v2){
+		return Vector3.Distance (v1, v2);
 	}
 
 }

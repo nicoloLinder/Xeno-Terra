@@ -83,7 +83,7 @@ public class PlanetGenerator : MonoBehaviour
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.B)) {
 			
-			//CreatePlanet ();
+			CreatePlanet ();
 		}
 	}
 
